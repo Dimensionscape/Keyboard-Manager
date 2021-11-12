@@ -13,7 +13,7 @@ import keyboard.KeyCode;
  */
 
 /**
-	The Keyboard Manager class is a lightweight API that enables access to keyboard events
+	The KeyboardManager delivers lightweight API that enables access to keyboard events
 	through simple callbacks, live key stroke information, and Character Code keypress without 
 	the burden of heavier event dispatching architectures.
 **/
