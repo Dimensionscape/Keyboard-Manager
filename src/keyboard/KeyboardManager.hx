@@ -2,7 +2,6 @@ package keyboard;
 
 import haxe.ds.IntMap;
 import openfl.errors.Error;
-import openfl.utils.Function;
 import openfl.display.Stage;
 import openfl.events.KeyboardEvent;
 import utils.IntBoolMap;
