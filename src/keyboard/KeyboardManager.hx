@@ -30,12 +30,12 @@ class KeyboardManager
 	/**
 		Determines whether or not a valid KeyboardManager has been initialized.
 	**/
-	public static var isInitialized(get, null):Bool = false;
+	public static var isInitialized(default, null):Bool = false;
 	
 	/**
 		Determines whether or not a valid KeyboardManager is currently running.
 	**/
-	public static var isRunning(get, null):Bool = false;
+	public static var isRunning(default, null):Bool = false;
 
 	/**
 		Initializes the KeyboardManager and binds the stage to it. Once started, it will begin listening to OpenFL for
