@@ -24,8 +24,8 @@ class KeyboardManager
 	private static var _keysDown:IntMap<Void->Void>;
 	private static var _keysUp:IntMap<Void->Void>;
 	private static var _keysPressed:IntBoolMap;
-	private static var _catchCharCodeCallback:Int->Void;
-	private static var _hasCatchCharCodeCallback:Bool = false;
+	private static var _keyPressedCallback:(KeyCode, Int)->Void;
+	private static var _hasKeyPressedCallback:Bool = false;
 	
 	/**
 		Determines whether or not a valid KeyboardManager has been initialized.
@@ -92,8 +92,8 @@ class KeyboardManager
 			_keysPressed.clear();
 			_keysPressed = null;
 
-			_catchCharCodeCallback = null;
-			_hasCatchCharCodeCallback = false;
+			_keyPressedCallback = null;
+			_hasKeyPressedCallback = false;
 			
 			isInitialized = false;
 		}
@@ -118,34 +118,34 @@ class KeyboardManager
 	}
 	
 	/**
-		Sets the callback that returns the character code of the arbitrary key actively pressed. If a non-character 
+		Sets the callback that returns the key code and character code of the arbitrary key actively pressed. If a non-character 
 		key is pressed, this this method will return 0.
 		
 		@param callback The callback function fired when a key is pressed. A function passed as the callback
 		should expect an Int parameter.
 	**/
-	public static function setCatchCharCodeCallback(callback:Int->Void):Void
+	public static function setKeyPressedCallback(callback:(KeyCode, Int)->Void):Void
 	{
-		_catchCharCodeCallback = callback;
-		if (callback != null) _hasCatchCharCodeCallback = true;
+		_keyPressedCallback = callback;
+		if (callback != null) _hasKeyPressedCallback = true;
 	}
 
 	/**
-		Removes the callback that returns the character code of the key actively pressed.
+		Removes the callback that returns the key code and character code of the key actively pressed.
 	**/
-	public static function removeCatchCharCodeCallback():Void
+	public static function removeKeyPressedCallback():Void
 	{
-		_catchCharCodeCallback = null;
-		_hasCatchCharCodeCallback = false;
+		_keyPressedCallback = null;
+		_hasKeyPressedCallback = false;
 	}
 	
 	/**
 		Returns a Boolean that reflects whether or not a callback has been set to catch arbitrary key presses that 
-		return a character code.
+		return a key code and character code.
 	**/
-	public static function hasCatchCharCodeCallback():Bool
+	public static function hasKeyPressedCallback():Bool
 	{
-		return _hasCatchCharCodeCallback;
+		return _hasKeyPressedCallback;
 	}
 	
 	/**
@@ -257,7 +257,7 @@ class KeyboardManager
 			callback();
 		}
 
-		if (_hasCatchCharCodeCallback) _catchCharCodeCallback(e.charCode);
+		if (_hasKeyPressedCallback) _keyPressedCallback(keyCode, e.charCode);
 	}
 
 	private static function _onKeyUp(e:KeyboardEvent)
